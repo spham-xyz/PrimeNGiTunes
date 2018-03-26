@@ -1,0 +1,20 @@
+<!-- https://stackoverflow.com/questions/38198117/how-can-i-use-html-templates-with-primeng-datatables -->
+<p-treeTable [value]="albumsTree" (onNodeExpand)="loadNode($event)">
+  <p-column field="albumName" header="Albums">
+    <ng-template let-col let-rowData="rowData" pTemplate="body">
+
+      <div *ngIf="rowData.leaf == undefined; then thenBlock else elseBlock"></div>
+      <ng-template #thenBlock>
+        <i class="fa fa-play" (click)="playAudio(rowData.data[col.field])"></i>
+        {{rowData.data['albumId']}}
+      </ng-template>
+      <ng-template #elseBlock>{{rowData.data[col.field]}}</ng-template>
+
+    </ng-template>
+  </p-column>
+  <p-column field="releaseDate" header="Release Date" [style]="{'text-align': 'center'}">
+    <ng-template let-col let-rowData="rowData" pTemplate="body">
+      {{rowData.data[col.field] | date:'MM/dd/yyyy'}}
+    </ng-template>
+  </p-column>
+</p-treeTable>

@@ -1,0 +1,9 @@
+i { 
+    cursor: pointer;
+    margin-left: 1em; 
+    margin-right: 5px
+}
+i:hover { 
+    transform: scale(1.25); 
+    color: blue; 
+}

@@ -1,0 +1,61 @@
+<p-growl [(value)]="msgs"></p-growl>
+
+<div class="ui-g">
+  <div class="ui-g-4">
+    <input type="text" size="25" pInputText (keyup)="searchTerm$.next($event.target.value)" placeholder="Search artist">
+  </div>
+</div>
+
+<div class="ui-g" *ngIf="artists?.length > 0">
+  <div class="ui-g-4">
+    <p-table [value]="artists" sortField="artistName" [sortOrder]="1" [paginator]="true" [rows]="15" [alwaysShowPaginator]="false"
+      [resizableColumns]="true" 
+      selectionMode="single" [(selection)]="selectedArtist" (onRowSelect)="rowSelect($event)">
+      <ng-template pTemplate="caption">
+        Artists
+      </ng-template>
+      <ng-template pTemplate="header">
+        <tr>
+          <th style="width:10%" pResizableColumn>#</th>
+          <!--
+          <th style="width:25%" [pSortableColumn]="artistId">
+            Id
+            <p-sortIcon [field]="artistId"></p-sortIcon>
+          </th>
+          -->
+          <th [pSortableColumn]="artistName" pResizableColumn>
+            Name
+            <p-sortIcon [field]="artistName"></p-sortIcon>
+          </th>
+          <th [pSortableColumn]="primaryGenreName" pResizableColumn>
+            Genre
+            <p-sortIcon [field]="primaryGenreName"></p-sortIcon>
+          </th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-artist let-rowData let-rowIndex="rowIndex">
+        <tr [pSelectableRow]="rowData">
+          <td>{{rowIndex + 1}}</td>
+          <td>{{artist.artistName}}</td>
+          <td>{{artist.primaryGenreName}}</td>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="emptymessage" let-columns>
+        <tr>
+          <td [attr.colspan]="columns.length">
+            No records found
+          </td>
+        </tr>
+      </ng-template>
+    </p-table>
+  </div>
+
+  <div class="ui-g-2">
+    <!-- Column divider -->
+  </div>
+
+  <div class="ui-g-6">
+    <app-album [artistId]="artistId" *ngIf="artistId > 0"></app-album>
+  </div>
+
+</div>
