@@ -6,30 +6,25 @@
   </div>
 </div>
 
-<div class="ui-g" *ngIf="artists?.length > 0">
+<!-- <div class="ui-g" *ngIf="artists?.length > 0"> -->
+<div class="ui-g">
   <div class="ui-g-4">
-    <p-table [value]="artists" sortField="artistName" [sortOrder]="1" [paginator]="true" [rows]="15" [alwaysShowPaginator]="false"
-      [resizableColumns]="true" 
-      selectionMode="single" [(selection)]="selectedArtist" (onRowSelect)="rowSelect($event)">
+    <p-table [value]="artists" [paginator]="true" [rows]="15" [alwaysShowPaginator]="false"
+      [resizableColumns]="true" selectionMode="single" [(selection)]="selectedArtist" (onRowSelect)="rowSelect($event)">
       <ng-template pTemplate="caption">
         Artists
       </ng-template>
       <ng-template pTemplate="header">
         <tr>
           <th style="width:10%" pResizableColumn>#</th>
-          <!--
-          <th style="width:25%" [pSortableColumn]="artistId">
-            Id
-            <p-sortIcon [field]="artistId"></p-sortIcon>
-          </th>
-          -->
-          <th [pSortableColumn]="artistName" pResizableColumn>
+          <th pResizableColumn>
+          <!-- <th [pSortableColumn]="artistName" pResizableColumn> -->
             Name
-            <p-sortIcon [field]="artistName"></p-sortIcon>
+            <!-- <p-sortIcon [field]="artistName"></p-sortIcon> -->
           </th>
           <th [pSortableColumn]="primaryGenreName" pResizableColumn>
             Genre
-            <p-sortIcon [field]="primaryGenreName"></p-sortIcon>
+            <!-- <p-sortIcon [field]="primaryGenreName"></p-sortIcon> -->
           </th>
         </tr>
       </ng-template>
@@ -42,7 +37,7 @@
       </ng-template>
       <ng-template pTemplate="emptymessage" let-columns>
         <tr>
-          <td [attr.colspan]="columns.length">
+          <td [attr.colspan]="3" [ngStyle]="{'text-align':'center'}">
             No records found
           </td>
         </tr>

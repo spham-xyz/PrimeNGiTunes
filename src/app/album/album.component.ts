@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, OnDestroy, Input } from '@angular/core';
 import { ItunesService } from '../shared/itunes.service';
 
 import { TreeNode } from 'primeng/api';
@@ -11,7 +11,7 @@ import { HttpErrorResponse } from '@angular/common/http';
   styleUrls: ['./album.component.css'],
   // providers: [ItunesService]
 })
-export class AlbumComponent implements OnInit {
+export class AlbumComponent implements OnInit, OnDestroy {
   player: any;
   _artistId: number = 0;
   albumsTree: TreeNode[];
@@ -29,6 +29,12 @@ export class AlbumComponent implements OnInit {
   ngOnInit(): void {
     this.player = new Audio();;
   }
+
+  ngOnDestroy() { 
+    this.player.pause(); 
+    this.player = null;
+    delete this.player;
+  }  
 
   getAlbums() {
     this.itunesService.getAlbumsTree(this.artistId)

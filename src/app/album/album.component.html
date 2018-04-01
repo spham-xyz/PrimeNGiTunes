@@ -1,4 +1,3 @@
-<!-- https://stackoverflow.com/questions/38198117/how-can-i-use-html-templates-with-primeng-datatables -->
 <p-treeTable [value]="albumsTree" (onNodeExpand)="loadNode($event)">
   <p-column field="albumName" header="Albums">
     <ng-template let-col let-rowData="rowData" pTemplate="body">
@@ -12,7 +11,7 @@
 
     </ng-template>
   </p-column>
-  <p-column field="releaseDate" header="Release Date" [style]="{'text-align': 'center'}">
+  <p-column field="releaseDate" header="Release Date" [style]="{'text-align': 'center', 'width': '30%'}">
     <ng-template let-col let-rowData="rowData" pTemplate="body">
       {{rowData.data[col.field] | date:'MM/dd/yyyy'}}
     </ng-template>
