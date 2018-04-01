@@ -83,7 +83,7 @@ MIT
 MIT
 MIT
 
-primeng@5.2.0
+primeng@5.2.4
 MIT
 The MIT License (MIT)
 
