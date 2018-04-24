@@ -1,0 +1,6 @@
+:host >>> .ui-card-title {
+  margin-left: 0.4em;
+}
+:host >>> .ui-card-body {
+  padding: 2em;
+}

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, VERSION } from '@angular/core';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Subject } from 'rxjs/Subject';
 
@@ -21,8 +21,11 @@ export class ArtistComponent implements OnInit {
   artists: Artist[];
   selectedArtist: Artist;
   artistId: number = 0;
+  ngVersion: string;
 
   constructor(private itunesService: ItunesService) {
+    this.ngVersion = `${VERSION.full}`;
+    
     this.itunesService.search(this.searchTerm$)
       .subscribe(
         data => {

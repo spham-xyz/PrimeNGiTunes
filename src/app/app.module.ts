@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule, HttpClientJsonpModule } from '@angular/common/http';
 
+import { CardModule } from 'primeng/card';
 import { GrowlModule } from 'primeng/growl';
 import { InputTextModule } from 'primeng/inputtext';
 import { TableModule } from 'primeng/table';
@@ -26,6 +27,7 @@ import { ItunesService } from './shared/itunes.service';
     ReactiveFormsModule,
     HttpClientModule,
     HttpClientJsonpModule,
+    CardModule,
     GrowlModule,
     InputTextModule,
     TableModule,

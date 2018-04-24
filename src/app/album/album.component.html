@@ -7,11 +7,13 @@
         <i class="fa fa-play" (click)="playAudio(rowData.data[col.field])"></i>
         {{rowData.data['albumId']}}
       </ng-template>
-      <ng-template #elseBlock>{{rowData.data[col.field]}}</ng-template>
+      <ng-template #elseBlock>
+        <img src="{{rowData.data['thumbnail']}}"> {{rowData.data[col.field]}}
+      </ng-template>
 
     </ng-template>
   </p-column>
-  <p-column field="releaseDate" header="Release Date" [style]="{'text-align': 'center', 'width': '30%'}">
+  <p-column field="releaseDate" header="Release Date">
     <ng-template let-col let-rowData="rowData" pTemplate="body">
       {{rowData.data[col.field] | date:'MM/dd/yyyy'}}
     </ng-template>

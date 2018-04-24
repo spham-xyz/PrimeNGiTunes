@@ -7,3 +7,11 @@ i:hover {
     transform: scale(1.25); 
     color: blue; 
 }
+
+img { vertical-align: middle; }
+
+p-column[field="releaseDate"]{
+  text-align: center;
+  vertical-align: middle; 
+  width: 30%
+}

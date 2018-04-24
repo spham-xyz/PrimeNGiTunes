@@ -25,20 +25,21 @@ export class ItunesService {
   }
   
   searchEntries(term) {
-    const url = `${API.SEARCH}callback=JSONP_CALLBACK&media=music&country=US&entity=musicArtist&limit=50&term=${term}`;
+    const url = `${API.SEARCH}media=music&country=US&entity=musicArtist&limit=50&term=${term}`;
 
-    return this.http.jsonp<Artist[]>(url, '')
+    return this.http.jsonp<Artist[]>(url, 'callback')
       .pipe(
         map(data => data['results'])
       );
   }
 
   public getAlbums(artistId: number): Observable<any[]> {
-    const url = `${API.LOOKUP}callback=JSONP_CALLBACK&entity=album&id=${artistId}`;
+    const url = `${API.LOOKUP}entity=album&id=${artistId}`;
 
     console.log('Albums url: ' + url);
-    return this.http.jsonp<any[]>(url, '')
+    return this.http.jsonp<any[]>(url, 'callback')
       .pipe(
+        // map(arr => arr['results'].filter(row => row['wrapperType'] == 'collection')),
         map(arr => arr['results'].filter(row => row['wrapperType'] == 'collection')),
         map(rows => {
           return rows.map(row => Object.assign({}, { albumId: row.collectionId }, { albumName: row.collectionName }, { releaseDate: row.releaseDate }));
@@ -47,17 +48,18 @@ export class ItunesService {
   }
 
   public getAlbumsTree(artistId: number): Observable<any[]> {
-    const url = `${API.LOOKUP}callback=JSONP_CALLBACK&entity=album&id=${artistId}`;
+    const url = `${API.LOOKUP}entity=album&id=${artistId}`;
 
     console.log('AlbumsTree url: ' + url);
-    return this.http.jsonp<any[]>(url, '')
+    return this.http.jsonp<any[]>(url, 'callback')
       .pipe(
         map(arr => arr['results'].filter(row => row['wrapperType'] == 'collection')),
         map(rows => {
           return rows.map(row => Object.assign({},
             {
               data:
-                { albumId: row.collectionId, albumName: row.collectionName, releaseDate: row.releaseDate }
+                // { albumId: row.collectionId, albumName: row.collectionName, releaseDate: row.releaseDate }
+                { albumId: row.collectionId, albumName: row.collectionName, thumbnail: row.artworkUrl100, releaseDate: row.releaseDate }
             },
             { leaf: false })
           );
@@ -66,10 +68,10 @@ export class ItunesService {
   }
 
   public getTracks(albumId: number): Observable<any[]> {
-    const url = `${API.LOOKUP}callback=JSONP_CALLBACK&entity=song&id=${albumId}`;
+    const url = `${API.LOOKUP}entity=song&id=${albumId}`;
 
     console.log('Tracks url: ' + url);
-    return this.http.jsonp(url, '')
+    return this.http.jsonp(url, 'callback')
       .pipe(
         map(arr => arr['results'].filter(row => row['wrapperType'] == 'track')),
         map(rows => {
